@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de Gestión de Ventas para Distribuidora">
+    <title>Distribuidora de Ventas - Sistema de Gestión</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles-validation.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Pantalla de Login -->
+    <div id="login-screen" class="screen active">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <div class="logo-container">
+                        <i class="fas fa-store-alt"></i>
+                    </div>
+                    <h1>Distribuidora de Ventas</h1>
+                    <p>Sistema de Gestión Comercial</p>
+                </div>
+
+                <form id="login-form" class="login-form">
+                    <div class="form-group">
+                        <label for="username">
+                            <i class="fas fa-user"></i>
+                            Usuario
+                        </label>
+                        <input type="text" id="username" name="username" placeholder="Ingrese su usuario" required
+                            autocomplete="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">
+                            <i class="fas fa-lock"></i>
+                            Contraseña
+                        </label>
+                        <input type="password" id="password" name="password" placeholder="Ingrese su contraseña"
+                            required autocomplete="current-password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Iniciar Sesión
+                    </button>
+                </form>
+
+                <!-- Pie de login retirado: información de usuario de prueba eliminada -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla Principal del Sistema -->
+    <div id="main-screen" class="screen">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-store-alt"></i>
+                    <span>Distribuidora</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-details">
+                    <h3 id="user-name">Usuario</h3>
+                    <p id="user-role">Rol</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="#" data-view="dashboard" class="nav-link active">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="admin-only">
+                        <a href="#" data-view="productos" class="nav-link">
+                            <i class="fas fa-box"></i>
+                            <span>Productos</span>
+                        </a>
+                    </li>
+                    <li class="admin-only">
+                        <a href="#" data-view="vendedores" class="nav-link">
+                            <i class="fas fa-users"></i>
+                            <span>Vendedores</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-view="ventas" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Ventas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-view="reportes" class="nav-link">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Reportes</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn btn-outline">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2 id="page-title">Dashboard</h2>
+                </div>
+                <div class="topbar-right">
+                    <div class="current-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span id="current-date"></span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <!-- Dashboard View -->
+                <div id="view-dashboard" class="view active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3 id="stat-ventas-hoy">0</h3>
+                                <p>Ventas Hoy</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3 id="stat-total-hoy">S/ 0.00</h3>
+                                <p>Total Hoy</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card admin-only">
+                            <div class="stat-icon bg-info">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3 id="stat-productos">0</h3>
+                                <p>Productos Activos</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card admin-only">
+                            <div class="stat-icon bg-warning">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3 id="stat-vendedores">0</h3>
+                                <p>Vendedores</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-content">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-chart-bar"></i> Ventas Recientes</h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="ventas-recientes-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Productos View -->
+                <div id="view-productos" class="view">
+                    <div class="view-header">
+                        <h2><i class="fas fa-box"></i> Gestión de Productos</h2>
+                        <button class="btn btn-primary" id="btn-nuevo-producto">
+                            <i class="fas fa-plus"></i>
+                            Nuevo Producto
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="data-table" id="table-productos">
+                                    <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Nombre</th>
+                                            <th>Categoría</th>
+                                            <th>Precio</th>
+                                            <th>Stock</th>
+                                            <th>Unidad</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody-productos">
+                                        <tr>
+                                            <td colspan="7" class="text-center">
+                                                <div class="loading">
+                                                    <i class="fas fa-spinner fa-spin"></i> Cargando...
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vendedores View -->
+                <div id="view-vendedores" class="view">
+                    <div class="view-header">
+                        <h2><i class="fas fa-users"></i> Gestión de Vendedores</h2>
+                        <button class="btn btn-primary" id="btn-nuevo-vendedor">
+                            <i class="fas fa-plus"></i>
+                            Nuevo Vendedor
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="data-table" id="table-vendedores">
+                                    <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Nombre</th>
+                                            <th>Usuario</th>
+                                            <th>Email</th>
+                                            <th>Comisión</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody-vendedores">
+                                        <tr>
+                                            <td colspan="7" class="text-center">
+                                                <div class="loading">
+                                                    <i class="fas fa-spinner fa-spin"></i> Cargando...
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ventas View -->
+                <div id="view-ventas" class="view">
+                    <div class="view-header">
+                        <h2><i class="fas fa-shopping-cart"></i> Registro de Ventas</h2>
+                        <button class="btn btn-primary" id="btn-nueva-venta">
+                            <i class="fas fa-plus"></i>
+                            Nueva Venta
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="data-table" id="table-ventas">
+                                    <thead>
+                                        <tr>
+                                            <th>N° Venta</th>
+                                            <th>Fecha</th>
+                                            <th>Vendedor</th>
+                                            <th>Cliente</th>
+                                            <th>Total</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody-ventas">
+                                        <tr>
+                                            <td colspan="7" class="text-center">
+                                                <div class="loading">
+                                                    <i class="fas fa-spinner fa-spin"></i> Cargando...
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reportes View -->
+                <div id="view-reportes" class="view">
+                    <div class="view-header">
+                        <h2><i class="fas fa-file-alt"></i> Reportes</h2>
+                    </div>
+
+                    <div class="reports-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-user-tie"></i> Ventas por Vendedor</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Rango de Fechas</label>
+                                    <div class="date-range">
+                                        <input type="date" id="reporte-vendedor-inicio" class="form-control">
+                                        <span>hasta</span>
+                                        <input type="date" id="reporte-vendedor-fin" class="form-control">
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" id="btn-generar-reporte-vendedor">
+                                    <i class="fas fa-chart-bar"></i>
+                                    Generar Reporte
+                                </button>
+                                <div id="reporte-vendedor-resultado" class="report-result"></div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-calendar-alt"></i> Ventas por Fecha</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Rango de Fechas</label>
+                                    <div class="date-range">
+                                        <input type="date" id="reporte-fecha-inicio" class="form-control">
+                                        <span>hasta</span>
+                                        <input type="date" id="reporte-fecha-fin" class="form-control">
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" id="btn-generar-reporte-fecha">
+                                    <i class="fas fa-chart-line"></i>
+                                    Generar Reporte
+                                </button>
+                                <div id="reporte-fecha-resultado" class="report-result"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modales -->
+    <div id="modal-container"></div>
+
+    <!-- Toast de Notificaciones -->
+    <div id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/productos.js"></script>
+    <script src="js/vendedores.js"></script>
+    <script src="js/ventas.js"></script>
+    <script src="js/reportes.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

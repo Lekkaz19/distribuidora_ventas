@@ -1,0 +1,58 @@
+# Configuración Apache para Distribuidora de Ventas
+
+# Habilitar reescritura de URLs
+RewriteEngine On
+
+# Prevenir acceso directo a archivos de configuración
+<FilesMatch "^(database|utils)\.php$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Configuración de seguridad
+<IfModule mod_headers.c>
+    # Prevenir XSS
+    Header set X-XSS-Protection "1; mode=block"
+    
+    # Prevenir clickjacking
+    Header always append X-Frame-Options SAMEORIGIN
+    
+    # Prevenir MIME sniffing
+    Header set X-Content-Type-Options nosniff
+    
+    # Habilitar CORS para desarrollo
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type"
+</IfModule>
+
+# Configuración de PHP
+<IfModule mod_php.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    php_value max_execution_time 300
+    php_value max_input_time 300
+    php_flag display_errors Off
+    php_flag log_errors On
+</IfModule>
+
+# Compresión GZIP
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Cache de archivos estáticos
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+</IfModule>
+
+# Página de error personalizada
+ErrorDocument 404 /distribuidora_ventas/index.html
+ErrorDocument 500 /distribuidora_ventas/index.html
