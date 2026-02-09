@@ -110,7 +110,12 @@ const Utils = {
      * Descargar archivo
      */
     downloadFile(content, filename, type = 'text/plain') {
-        const blob = new Blob([content], { type });
+        // Fix para Excel UTF-8: Agregar BOM
+        if (type.includes('csv') || type.includes('excel')) {
+            content = '\uFEFF' + content;
+        }
+
+        const blob = new Blob([content], { type: `${type};charset=utf-8` });
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;

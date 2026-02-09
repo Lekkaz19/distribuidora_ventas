@@ -73,7 +73,7 @@ function login() {
         }
         
         // Buscar usuario por username (sin filtrar por estado aquí para poder informar si está inactivo)
-        $sql = "SELECT u.*, r.nombre_rol, v.id_vendedor, v.codigo_vendedor 
+        $sql = "SELECT u.*, r.nombre_rol, v.id_vendedor, v.codigo_vendedor, v.estado as estado_vendedor 
                 FROM usuarios u 
                 INNER JOIN roles r ON u.id_rol = r.id_rol 
                 LEFT JOIN vendedores v ON u.id_usuario = v.id_usuario 
@@ -87,9 +87,15 @@ function login() {
             Utils::sendJsonResponse(false, null, 'Usuario o contraseña incorrectos', 401);
         }
 
-        // Si el usuario existe pero está inactivo, denegar acceso con mensaje claro
+        // Validación de estado del usuario (tabla usuarios)
         if (isset($user['estado']) && $user['estado'] !== 'activo') {
             Utils::sendJsonResponse(false, null, 'Usuario inactivo. Contacte al administrador.', 403);
+        }
+
+        // Validación de estado del vendedor (si es vendedor)
+        // Si tiene registro en tabla vendedores Y ese registro no está activo
+        if (!empty($user['id_vendedor']) && isset($user['estado_vendedor']) && $user['estado_vendedor'] !== 'activo') {
+            Utils::sendJsonResponse(false, null, 'Cuenta de vendedor inactiva. Contacte al administrador.', 403);
         }
 
         // Verificación normal de contraseña con bcrypt

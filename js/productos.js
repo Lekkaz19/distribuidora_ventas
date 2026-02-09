@@ -205,6 +205,47 @@ const Productos = {
     async guardarProducto(modalId, isEdit) {
         const form = document.getElementById('form-producto');
 
+        // Validación manual para evitar comportamientos inconsistentes
+        // con la validación nativa en modales (algunos navegadores pueden
+        // no reconocer valores hasta blur). Validamos el precio explícitamente.
+        const precioInput = document.getElementById('precio_unitario');
+        const nombreInput = document.getElementById('nombre_producto');
+        const grupoInput = document.getElementById('id_grupo');
+
+        if (!nombreInput || nombreInput.value.trim() === '') {
+            UI.showToast('Complete el nombre del producto', 'warning');
+            if (nombreInput) nombreInput.focus();
+            return;
+        }
+
+        if (!grupoInput || grupoInput.value === '') {
+            UI.showToast('Seleccione una categoría', 'warning');
+            if (grupoInput) grupoInput.focus();
+            return;
+        }
+
+        if (!precioInput) {
+            UI.showToast('El campo precio no existe en el formulario', 'error');
+            return;
+        }
+
+        const precioVal = precioInput.value.toString().trim();
+        const precioNum = parseFloat(precioVal);
+
+        if (precioVal === '' || isNaN(precioNum)) {
+            UI.showToast('Complete el campo Precio Unitario con un número válido', 'warning');
+            precioInput.focus();
+            return;
+        }
+
+        // Comprueba que sea mayor a cero
+        if (precioNum <= 0) {
+            UI.showToast('El precio debe ser mayor a cero', 'warning');
+            precioInput.focus();
+            return;
+        }
+
+        // Si la validación nativa falla por otro campo, mostramos el mensaje nativo
         if (!form.checkValidity()) {
             form.reportValidity();
             return;

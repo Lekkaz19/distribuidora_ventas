@@ -76,6 +76,9 @@ const Vendedores = {
                         <button class="btn btn-sm btn-primary" onclick="Vendedores.mostrarFormulario(${vendedor.id_vendedor})" title="Editar">
                             <i class="fas fa-edit"></i>
                         </button>
+                        <button class="btn btn-sm btn-danger" onclick="Vendedores.eliminarVendedor(${vendedor.id_vendedor})" title="Eliminar">
+                            <i class="fas fa-trash"></i>
+                        </button>
                     </td>
                 </tr>
             `;
@@ -85,6 +88,35 @@ const Vendedores = {
     /**
      * RF-09: Mostrar formulario de vendedor
      */
+    /**
+     * Eliminar vendedor
+     */
+    async eliminarVendedor(id) {
+        const confirmado = await UI.confirm(
+            '¿Está seguro de eliminar este vendedor y su usuario asociado? Esta acción no se puede deshacer.',
+            'Eliminar Vendedor',
+            'danger'
+        );
+        if (!confirmado) return;
+
+        const tbody = document.getElementById('tbody-vendedores');
+
+        try {
+            const response = await API.deleteVendedor(id);
+            if (response.success) {
+                UI.showToast('Vendedor eliminado correctamente', 'success');
+                this.cargarVendedores();
+            } else {
+                UI.showToast(response.message, 'error');
+            }
+        } catch (error) {
+            console.error('Error al eliminar vendedor:', error);
+            // Mostrar mensaje del servidor si existe, sino el genérico
+            UI.showToast(error.message || 'Error al eliminar vendedor', 'error');
+            this.cargarVendedores();
+        }
+    },
+
     /**
      * RF-09: Mostrar formulario de vendedor con validaciones
      */

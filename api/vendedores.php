@@ -57,6 +57,15 @@ switch ($action) {
         }
         break;
         
+    case 'delete':
+        if ($method === 'DELETE') {
+            if (!Utils::isAdmin()) {
+                Utils::sendJsonResponse(false, null, 'Acceso denegado. Solo administradores', 403);
+            }
+            eliminarVendedor();
+        }
+        break;
+
     default:
         Utils::sendJsonResponse(false, null, 'Acción no válida', 400);
 }
@@ -312,5 +321,62 @@ function actualizarVendedor() {
     } catch (Exception $e) {
         error_log("Error en actualizarVendedor: " . $e->getMessage());
         Utils::sendJsonResponse(false, null, 'Error al actualizar vendedor', 500);
+    }
+}
+
+/**
+ * Eliminar vendedor (y usuario)
+ */
+function eliminarVendedor() {
+    try {
+        // Permitir ID por Query Param o Body
+        $input = json_decode(file_get_contents('php://input'), true);
+        $id = $_GET['id'] ?? ($input['id'] ?? 0);
+        
+        if (!$id) {
+            Utils::sendJsonResponse(false, null, 'ID de vendedor requerido', 400);
+        }
+        
+        $database = new Database();
+        $conn = $database->getConnection();
+        
+        // Obtener ID usuario para eliminar ambos
+        $stmtGet = $conn->prepare("SELECT id_usuario FROM vendedores WHERE id_vendedor = :id");
+        $stmtGet->execute([':id' => $id]);
+        $vendedor = $stmtGet->fetch(PDO::FETCH_ASSOC);
+        
+        if (!$vendedor) {
+            Utils::sendJsonResponse(false, null, 'Vendedor no encontrado', 404);
+        }
+        
+        $conn->beginTransaction();
+        
+        try {
+            // 1. Eliminar Vendedor
+            $stmtDelV = $conn->prepare("DELETE FROM vendedores WHERE id_vendedor = :id");
+            $stmtDelV->execute([':id' => $id]);
+            
+            // 2. Eliminar Usuario asociado
+            $stmtDelU = $conn->prepare("DELETE FROM usuarios WHERE id_usuario = :uid");
+            $stmtDelU->execute([':uid' => $vendedor['id_usuario']]);
+            
+            $conn->commit();
+            Utils::sendJsonResponse(true, null, 'Vendedor eliminado exitosamente', 200);
+            
+        } catch (PDOException $e) {
+            $conn->rollBack();
+            // Error de integridad referencial (Ventas asociadas)
+            if ($e->getCode() == '23000') {
+                Utils::sendJsonResponse(false, null, 'No se puede eliminar: El vendedor tiene ventas registradas. Intente desactivarlo (Editar -> Estado: Inactivo).', 409);
+            }
+            throw $e;
+        } catch (Exception $e) {
+            $conn->rollBack();
+            throw $e;
+        }
+        
+    } catch (Exception $e) {
+        error_log("Error en eliminarVendedor: " . $e->getMessage());
+        Utils::sendJsonResponse(false, null, 'Error al eliminar vendedor: ' . $e->getMessage(), 500);
     }
 }

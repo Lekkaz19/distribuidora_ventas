@@ -222,30 +222,61 @@ const UI = {
     /**
      * Confirmar acción
      */
-    async confirm(message, title = '¿Está seguro?') {
+    /**
+     * Confirmar acción (Diseño Bonito)
+     */
+    async confirm(message, title = '¿Está seguro?', type = 'warning') {
         return new Promise((resolve) => {
-            const modalId = this.createModal(
-                title,
-                `<p style="font-size: 1.1rem; color: var(--gray-700);">${Utils.escapeHtml(message)}</p>`,
-                [
-                    {
-                        text: 'Cancelar',
-                        class: 'btn btn-outline',
-                        onClick: () => {
-                            this.closeModal(modalId);
-                            resolve(false);
-                        }
-                    },
-                    {
-                        text: 'Confirmar',
-                        class: 'btn btn-primary',
-                        onClick: () => {
-                            this.closeModal(modalId);
-                            resolve(true);
-                        }
-                    }
-                ]
-            );
+            const overlay = document.createElement('div');
+            overlay.className = 'confirm-modal-overlay';
+
+            // Icono
+            const iconType = type === 'danger' ? 'trash-alt' : 'exclamation-triangle';
+            const iconClass = `fas fa-${iconType}`;
+
+            // Colores
+            let iconBg, iconColor, btnBg;
+            if (type === 'danger') {
+                iconBg = '#fee2e2'; iconColor = '#ef4444'; btnBg = '#ef4444';
+            } else {
+                iconBg = '#fef3c7'; iconColor = '#f59e0b'; btnBg = '#f59e0b'; // Amarillo warning
+            }
+
+            // HTML
+            overlay.innerHTML = `
+                <div class="confirm-modal">
+                    <div class="confirm-modal-icon" style="background:${iconBg}; color:${iconColor}">
+                        <i class="${iconClass}"></i>
+                    </div>
+                    <h3>${title}</h3> <!-- No escapamos title para permitir iconos si se desea, message sí se escapa si viene de usuario -->
+                    <p>${message}</p>
+                    <div class="confirm-actions">
+                        <button class="btn-confirm-cancel" id="confirm-cancel">Cancelar</button>
+                        <button class="btn-confirm-delete" id="confirm-ok" style="background:${btnBg}">Confirmar</button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(overlay);
+
+            // Funciones
+            const close = (result) => {
+                if (overlay.style.animation) return; // Evitar doble click
+                overlay.style.animation = 'fadeOut 0.2s ease';
+                setTimeout(() => {
+                    if (document.body.contains(overlay)) document.body.removeChild(overlay);
+                    resolve(result);
+                }, 180);
+            };
+
+            // Eventos
+            overlay.querySelector('#confirm-cancel').onclick = () => close(false);
+            overlay.querySelector('#confirm-ok').onclick = () => close(true);
+
+            // Cerrar click fuera
+            overlay.onclick = (e) => {
+                if (e.target === overlay) close(false);
+            };
         });
     },
 

@@ -139,6 +139,12 @@ const API = {
         return this.post(CONFIG.ENDPOINTS.VENDEDORES.UPDATE, data);
     },
 
+    async deleteVendedor(id) {
+        return this.request(CONFIG.ENDPOINTS.VENDEDORES.DELETE + '&id=' + id, {
+            method: 'DELETE'
+        });
+    },
+
     // ========== VENTAS ==========
 
     async getVentas(filters = {}) {

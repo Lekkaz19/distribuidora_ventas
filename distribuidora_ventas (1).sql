@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 03-02-2026 a las 23:08:28
+-- Tiempo de generación: 09-02-2026 a las 23:19:10
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -118,6 +118,77 @@ CREATE TABLE `auditoria` (
   `fecha_accion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `auditoria`
+--
+
+INSERT INTO `auditoria` (`id_auditoria`, `tabla_afectada`, `accion`, `id_registro`, `datos_anteriores`, `datos_nuevos`, `id_usuario`, `ip_address`, `fecha_accion`) VALUES
+(1, 'usuarios', '', 1, NULL, '{\"username\":\"admin\"}', 1, '::1', '2026-02-03 22:55:43'),
+(2, 'vendedores', 'UPDATE', 5, NULL, '{\"comision\":6,\"meta\":12000,\"estado\":\"vacaciones\"}', 1, '::1', '2026-02-03 22:56:04'),
+(3, 'vendedores', 'UPDATE', 5, NULL, '{\"comision\":6,\"meta\":12000,\"estado\":\"inactivo\"}', 1, '::1', '2026-02-03 22:56:12'),
+(4, 'productos', 'INSERT', 15, NULL, '{\"codigo\":\"PROD950241\",\"nombre\":\"Manzana\",\"precio\":1}', 1, '::1', '2026-02-03 22:58:17'),
+(5, 'productos', 'INSERT', 16, NULL, '{\"codigo\":\"PROD413803\",\"nombre\":\"zzzzz\",\"precio\":12}', 1, '::1', '2026-02-03 22:59:04'),
+(6, 'vendedores', 'UPDATE', 3, NULL, '{\"comision\":6,\"meta\":10000,\"estado\":\"activo\"}', 1, '::1', '2026-02-03 23:00:24'),
+(7, 'vendedores', 'UPDATE', 5, NULL, '{\"comision\":6,\"meta\":12000,\"estado\":\"vacaciones\"}', 1, '::1', '2026-02-03 23:03:15'),
+(8, 'vendedores', 'UPDATE', 5, NULL, '{\"comision\":6,\"meta\":12000,\"estado\":\"inactivo\"}', 1, '::1', '2026-02-03 23:13:14'),
+(9, 'ventas', 'INSERT', 1, NULL, '{\"numero_venta\":\"V39973597\",\"total\":784,\"productos_count\":2}', 1, '::1', '2026-02-03 23:27:13'),
+(10, 'vendedores', 'INSERT', 7, NULL, '{\"codigo\":\"VEN1128\",\"nombre\":\"Fernando Lecca\"}', 1, '::1', '2026-02-03 23:28:48'),
+(11, 'vendedores', 'UPDATE', 7, NULL, '{\"comision\":5,\"meta\":12000,\"estado\":\"vacaciones\"}', 1, '::1', '2026-02-03 23:28:53'),
+(12, 'vendedores', 'UPDATE', 7, NULL, '{\"comision\":5,\"meta\":12000,\"estado\":\"inactivo\"}', 1, '::1', '2026-02-03 23:28:57'),
+(13, 'usuarios', '', 9, NULL, '{\"username\":\"fer123\"}', 9, '::1', '2026-02-03 23:29:59'),
+(14, 'ventas', 'INSERT', 2, NULL, '{\"numero_venta\":\"V62964252\",\"total\":32,\"productos_count\":1}', 1, '::1', '2026-02-03 23:32:09'),
+(15, 'ventas', 'INSERT', 3, NULL, '{\"numero_venta\":\"V62693330\",\"total\":3,\"productos_count\":1}', 1, '::1', '2026-02-03 23:32:33'),
+(16, 'ventas', 'INSERT', 4, NULL, '{\"numero_venta\":\"V21262505\",\"total\":128,\"productos_count\":1}', 9, '::1', '2026-02-03 23:35:59'),
+(17, 'usuarios', '', 9, NULL, '{\"username\":\"fer123\"}', 9, '::1', '2026-02-03 23:36:07'),
+(18, 'usuarios', '', 9, NULL, '{\"username\":\"fer123\"}', 9, '::1', '2026-02-03 23:36:59'),
+(19, 'usuarios', '', 9, NULL, '{\"username\":\"fer123\"}', 9, '::1', '2026-02-03 23:37:38'),
+(20, 'vendedores', 'INSERT', 8, NULL, '{\"codigo\":\"VEN1098\",\"nombre\":\"ferrr\"}', 1, '::1', '2026-02-03 23:38:02'),
+(21, 'vendedores', 'UPDATE', 7, NULL, '{\"comision\":5,\"meta\":12000,\"estado\":\"activo\"}', 1, '::1', '2026-02-03 23:38:14'),
+(22, 'usuarios', '', 1, NULL, '{\"username\":\"admin\"}', 1, '::1', '2026-02-03 23:38:16'),
+(23, 'usuarios', '', 10, NULL, '{\"username\":\"fer321\"}', NULL, '::1', '2026-02-03 23:38:23'),
+(24, 'usuarios', '', 9, NULL, '{\"username\":\"fer123\"}', 9, '::1', '2026-02-03 23:38:32'),
+(25, 'usuarios', '', 10, NULL, '{\"username\":\"fer321\"}', NULL, '::1', '2026-02-03 23:38:39'),
+(26, 'usuarios', '', 1, NULL, '{\"username\":\"admin\"}', 1, '::1', '2026-02-03 23:44:46'),
+(27, 'productos', 'UPDATE', 11, '{\"id_producto\":11,\"codigo_producto\":\"HOR004\",\"nombre_producto\":\"Berenjenas\",\"id_grupo\":2,\"precio_unitario\":\"3.00\",\"stock_disponible\":\"350.00\",\"stock_minimo\":\"0.00\",\"unidad_medida\":\"kg\",\"estado\":\"activo\",\"fecha_alta\":\"2004-03-15\",\"id_usuario_registro\":1,\"fecha_actualizacion\":\"2026-02-03 16:33:11\"}', '{\"codigo\":\"HOR004\",\"nombre\":\"Berenjenas\",\"precio\":4}', 1, '::1', '2026-02-03 23:44:55'),
+(28, 'productos', 'DELETE', 16, NULL, '{\"estado\":\"inactivo\"}', 1, '::1', '2026-02-03 23:45:02'),
+(29, 'vendedores', 'UPDATE', 5, NULL, '{\"comision\":6,\"meta\":12000,\"estado\":\"activo\"}', 1, '::1', '2026-02-03 23:45:32'),
+(30, 'ventas', 'INSERT', 5, NULL, '{\"numero_venta\":\"V65573893\",\"total\":4,\"productos_count\":1}', 9, '::1', '2026-02-03 23:46:37'),
+(31, 'productos', 'UPDATE', 13, '{\"id_producto\":13,\"codigo_producto\":\"VER002\",\"nombre_producto\":\"Lechugas\",\"id_grupo\":3,\"precio_unitario\":\"2.00\",\"stock_disponible\":\"400.00\",\"stock_minimo\":\"0.00\",\"unidad_medida\":\"kg\",\"estado\":\"activo\",\"fecha_alta\":\"2004-03-15\",\"id_usuario_registro\":1,\"fecha_actualizacion\":\"2026-02-03 16:33:11\"}', '{\"codigo\":\"VER002\",\"nombre\":\"Lechugas\",\"precio\":3}', 1, '::1', '2026-02-03 23:47:38'),
+(32, 'productos', 'INSERT', 17, NULL, '{\"codigo\":\"PROD536461\",\"nombre\":\"AAAAAAA\",\"precio\":3}', 1, '::1', '2026-02-03 23:47:57'),
+(33, 'ventas', 'INSERT', 8, NULL, '{\"numero_venta\":\"V26681692\",\"total\":128,\"productos_count\":1}', 1, '::1', '2026-02-03 23:48:25'),
+(34, 'usuarios', '', 9, NULL, '{\"username\":\"fer123\"}', 9, '::1', '2026-02-03 23:48:43'),
+(35, 'vendedores', 'UPDATE', 7, NULL, '{\"comision\":5,\"meta\":12000,\"estado\":\"inactivo\"}', 1, '::1', '2026-02-03 23:52:19'),
+(36, 'usuarios', '', 9, NULL, '{\"username\":\"fer123\"}', 9, '::1', '2026-02-03 23:52:36'),
+(37, 'usuarios', '', 9, NULL, '{\"username\":\"fer123\"}', 9, '::1', '2026-02-03 23:52:42'),
+(38, 'usuarios', '', 9, NULL, '{\"username\":\"fer123\"}', 9, '::1', '2026-02-03 23:55:16'),
+(39, 'usuarios', '', 1, NULL, '{\"username\":\"admin\"}', 1, '::1', '2026-02-04 00:00:31'),
+(40, 'usuarios', '', 1, NULL, '{\"username\":\"admin\"}', 1, '::1', '2026-02-09 21:07:09'),
+(41, 'usuarios', '', 9, NULL, '{\"username\":\"fer123\"}', 9, '::1', '2026-02-09 21:08:08'),
+(42, 'productos', 'DELETE', 17, NULL, '{\"estado\":\"inactivo\"}', 1, '::1', '2026-02-09 21:11:50'),
+(43, 'usuarios', '', 9, NULL, '{\"username\":\"fer123\"}', 9, '::1', '2026-02-09 21:14:44'),
+(44, 'vendedores', 'UPDATE', 7, NULL, '{\"comision\":5,\"meta\":12000,\"estado\":\"activo\"}', 1, '::1', '2026-02-09 21:14:57'),
+(45, 'usuarios', '', 9, NULL, '{\"username\":\"fer123\"}', 9, '::1', '2026-02-09 21:15:00'),
+(46, 'ventas', 'INSERT', 10, NULL, '{\"numero_venta\":\"V03354131\",\"total\":52,\"productos_count\":2}', 9, '::1', '2026-02-09 21:25:01'),
+(47, 'usuarios', '', 9, NULL, '{\"username\":\"fer123\"}', 9, '::1', '2026-02-09 21:50:00'),
+(48, 'vendedores', 'UPDATE', 8, NULL, '{\"comision\":5,\"meta\":20000,\"estado\":\"inactivo\"}', 1, '::1', '2026-02-09 21:50:12'),
+(49, 'vendedores', 'UPDATE', 7, NULL, '{\"comision\":5,\"meta\":12000,\"estado\":\"inactivo\"}', 1, '::1', '2026-02-09 21:50:18'),
+(50, 'vendedores', 'UPDATE', 7, NULL, '{\"comision\":5,\"meta\":12000,\"estado\":\"activo\"}', 1, '::1', '2026-02-09 21:50:39'),
+(51, 'usuarios', '', 9, NULL, '{\"username\":\"fer123\"}', 9, '::1', '2026-02-09 21:50:41'),
+(52, 'vendedores', 'UPDATE', 6, NULL, '{\"comision\":5,\"meta\":1000,\"estado\":\"activo\"}', 1, '::1', '2026-02-09 21:55:01'),
+(53, 'vendedores', 'INSERT', 9, NULL, '{\"codigo\":\"VEN4200\",\"nombre\":\"Fernando Leccasss\"}', 1, '::1', '2026-02-09 22:07:13'),
+(54, 'vendedores', 'UPDATE', 9, NULL, '{\"comision\":5,\"meta\":12000,\"estado\":\"inactivo\"}', 1, '::1', '2026-02-09 22:07:19'),
+(55, 'vendedores', 'UPDATE', 9, NULL, '{\"comision\":5,\"meta\":12000,\"estado\":\"activo\"}', 1, '::1', '2026-02-09 22:07:28'),
+(56, 'usuarios', '', 9, NULL, '{\"username\":\"fer123\"}', 9, '::1', '2026-02-09 22:07:34'),
+(57, 'usuarios', '', 11, NULL, '{\"username\":\"fer321\"}', 11, '::1', '2026-02-09 22:07:52'),
+(58, 'ventas', 'INSERT', 11, NULL, '{\"numero_venta\":\"V79607855\",\"total\":12,\"productos_count\":1}', 11, '::1', '2026-02-09 22:08:52'),
+(59, 'ventas', 'INSERT', 12, NULL, '{\"numero_venta\":\"V59749149\",\"total\":48,\"productos_count\":1}', 11, '::1', '2026-02-09 22:09:11'),
+(60, 'usuarios', '', 11, NULL, '{\"username\":\"fer321\"}', 11, '::1', '2026-02-09 22:09:31'),
+(61, 'vendedores', 'UPDATE', 9, NULL, '{\"comision\":5,\"meta\":12000,\"estado\":\"inactivo\"}', 1, '::1', '2026-02-09 22:09:38'),
+(62, 'vendedores', 'UPDATE', 9, NULL, '{\"comision\":5,\"meta\":12000,\"estado\":\"activo\"}', 1, '::1', '2026-02-09 22:09:55'),
+(63, 'productos', 'INSERT', 18, NULL, '{\"codigo\":\"asdads\",\"nombre\":\"zzzzz\",\"precio\":122}', 1, '::1', '2026-02-09 22:10:13'),
+(64, 'productos', 'UPDATE', 18, '{\"id_producto\":18,\"codigo_producto\":\"asdads\",\"nombre_producto\":\"zzzzz\",\"id_grupo\":1,\"precio_unitario\":\"122.00\",\"stock_disponible\":\"1221.00\",\"stock_minimo\":\"12.00\",\"unidad_medida\":\"unidad\",\"estado\":\"activo\",\"fecha_alta\":\"2026-02-09\",\"id_usuario_registro\":1,\"fecha_actualizacion\":\"2026-02-09 17:10:13\"}', '{\"codigo\":\"asdads\",\"nombre\":\"zzzzz\",\"precio\":122}', 1, '::1', '2026-02-09 22:10:21'),
+(65, 'productos', 'DELETE', 18, NULL, '{\"estado\":\"inactivo\"}', 1, '::1', '2026-02-09 22:10:25');
+
 -- --------------------------------------------------------
 
 --
@@ -137,6 +208,17 @@ CREATE TABLE `clientes` (
   `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`id_cliente`, `nombre_cliente`, `ruc_dni`, `direccion`, `telefono`, `email`, `tipo_cliente`, `descuento_porcentaje`, `estado`, `fecha_registro`) VALUES
+(4, 'Restaurante El Buen Sabor', '20123456789', 'Av. Principal 123, Lima', '014567890', 'ventas@buensabor.com', 'mayorista', 5.00, 'activo', '2026-02-03 22:48:21'),
+(5, 'Mercado San José', '20987654321', 'Jr. Comercio 456, Lima', '014567891', 'compras@mercadosj.com', 'mayorista', 3.00, 'activo', '2026-02-03 22:48:21'),
+(6, 'Bodega La Esquina', '10456789123', 'Calle Los Olivos 789, Lima', '987123456', NULL, 'minorista', 0.00, 'activo', '2026-02-03 22:48:21'),
+(7, 'Supermercado Los Andes', '20555666777', 'Av. Los Andes 321, Lima', '014567892', 'compras@losandes.com', 'mayorista', 4.00, 'activo', '2026-02-03 22:48:21'),
+(8, 'Minimarket Express', '10888999000', 'Jr. Progreso 654, Lima', '987654324', NULL, 'minorista', 0.00, 'activo', '2026-02-03 22:48:21');
+
 -- --------------------------------------------------------
 
 --
@@ -151,6 +233,18 @@ CREATE TABLE `detalle_ventas` (
   `precio_unitario` decimal(10,2) NOT NULL,
   `subtotal` decimal(12,2) GENERATED ALWAYS AS (`cantidad` * `precio_unitario`) STORED
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `detalle_ventas`
+--
+
+INSERT INTO `detalle_ventas` (`id_detalle`, `id_venta`, `id_producto`, `cantidad`, `precio_unitario`) VALUES
+(5, 4, 5, 32.00, 4.00),
+(6, 5, 1, 4.00, 1.00),
+(8, 10, 5, 11.00, 4.00),
+(9, 10, 2, 4.00, 2.00),
+(10, 11, 12, 12.00, 1.00),
+(11, 12, 5, 12.00, 4.00);
 
 --
 -- Disparadores `detalle_ventas`
@@ -203,6 +297,14 @@ CREATE TABLE `historial_precios` (
   `motivo` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `historial_precios`
+--
+
+INSERT INTO `historial_precios` (`id_historial`, `id_producto`, `precio_anterior`, `precio_nuevo`, `id_usuario_cambio`, `fecha_cambio`, `motivo`) VALUES
+(1, 11, 3.00, 4.00, NULL, '2026-02-03 23:44:55', NULL),
+(2, 13, 2.00, 3.00, NULL, '2026-02-03 23:47:38', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -229,20 +331,24 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `codigo_producto`, `nombre_producto`, `id_grupo`, `precio_unitario`, `stock_disponible`, `stock_minimo`, `unidad_medida`, `estado`, `fecha_alta`, `id_usuario_registro`, `fecha_actualizacion`) VALUES
-(1, 'FRU001', 'Naranjas', 1, 1.00, 1000.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 21:33:11'),
-(2, 'FRU002', 'Malocoton', 1, 2.00, 800.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 21:33:11'),
+(1, 'FRU001', 'Naranjas', 1, 1.00, 964.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 23:46:37'),
+(2, 'FRU002', 'Malocoton', 1, 2.00, 796.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-09 21:25:00'),
 (3, 'FRU003', 'Melones', 1, 2.00, 500.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 21:33:11'),
 (4, 'FRU004', 'Mandarinas', 1, 4.00, 600.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 21:33:11'),
-(5, 'FRU005', 'Uvas', 1, 4.00, 400.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 21:33:11'),
+(5, 'FRU005', 'Uvas', 1, 4.00, 313.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-09 22:09:11'),
 (6, 'FRU006', 'Platanos', 1, 2.00, 900.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 21:33:11'),
 (7, 'FRU007', 'Manzana', 1, 4.00, 750.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 21:33:11'),
 (8, 'HOR001', 'Esparragos', 2, 1.00, 300.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 21:33:11'),
 (9, 'HOR002', 'Pimientos', 2, 0.50, 600.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 21:33:11'),
-(10, 'HOR003', 'Zanaorias', 2, 1.00, 800.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 21:33:11'),
-(11, 'HOR004', 'Berenjenas', 2, 3.00, 350.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 21:33:11'),
-(12, 'VER001', 'Tomates', 3, 1.00, 900.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 21:33:11'),
-(13, 'VER002', 'Lechugas', 3, 2.00, 400.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 21:33:11'),
-(14, 'VER003', 'Coles', 3, 1.00, 500.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 21:33:11');
+(10, 'HOR003', 'Zanaorias', 2, 1.00, 397.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 23:32:33'),
+(11, 'HOR004', 'Berenjenas', 2, 4.00, 350.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 23:44:55'),
+(12, 'VER001', 'Tomates', 3, 1.00, 888.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-09 22:08:52'),
+(13, 'VER002', 'Lechugas', 3, 3.00, 400.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 23:47:38'),
+(14, 'VER003', 'Coles', 3, 1.00, 500.00, 0.00, 'kg', 'activo', '2004-03-15', 1, '2026-02-03 21:33:11'),
+(15, 'PROD950241', 'Manzana', 1, 1.00, 50.00, 10.00, 'kg', 'activo', '2026-02-03', 1, '2026-02-03 22:58:17'),
+(16, 'PROD413803', 'zzzzz', 3, 12.00, 300.00, 0.10, 'unidad', 'inactivo', '2026-02-03', 1, '2026-02-03 23:45:02'),
+(17, 'PROD536461', 'AAAAAAA', 2, 3.00, 2000.00, 1000.00, 'unidad', 'inactivo', '2026-02-03', 1, '2026-02-09 21:11:50'),
+(18, 'asdads', 'zzzzz', 1, 122.00, 1221.00, 12.00, 'kg', 'inactivo', '2026-02-09', 1, '2026-02-09 22:10:25');
 
 --
 -- Disparadores `productos`
@@ -304,7 +410,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `username`, `password_hash`, `nombre_completo`, `email`, `telefono`, `id_rol`, `estado`, `ultimo_acceso`, `fecha_creacion`, `fecha_actualizacion`) VALUES
-(1, 'admin', '$2a$10$ejemplo_hash_password', 'Administrador Sistema', 'admin@distribuidora.com', NULL, 1, 'activo', NULL, '2026-02-03 21:33:11', '2026-02-03 21:33:11');
+(1, 'admin', '$2y$10$DDEeOMlonrYEPnBtbEuveeHmzHzI3Y1P4TFXjpOnM4IAgUV8q65qK', 'Administrador Sistema', 'admin@distribuidora.com', NULL, 1, 'activo', '2026-02-09 21:07:09', '2026-02-03 21:33:11', '2026-02-09 21:07:09'),
+(9, 'fer123', '$2y$10$qlhiQIgzrMs7kLiIzm0x4eexhDN6wQ9BpD/adSR2k2HEvVrDOfnu.', 'Fernando Lecca', 'fer@example.com', '322332', 2, 'activo', '2026-02-09 21:50:41', '2026-02-03 23:28:48', '2026-02-09 21:50:41'),
+(11, 'fer321', '$2y$10$vCZlH7eXfGhI491VzAmeDO3.WVqePg9tCh1KtN0FO5Z6ic/RdYVbW', 'Fernando Leccasss', 'fer@exams.com', '12345432', 2, 'activo', '2026-02-09 22:07:52', '2026-02-09 22:07:13', '2026-02-09 22:07:52');
 
 -- --------------------------------------------------------
 
@@ -322,6 +430,14 @@ CREATE TABLE `vendedores` (
   `fecha_contratacion` date NOT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `vendedores`
+--
+
+INSERT INTO `vendedores` (`id_vendedor`, `id_usuario`, `codigo_vendedor`, `comision_porcentaje`, `meta_mensual`, `estado`, `fecha_contratacion`, `fecha_creacion`) VALUES
+(7, 9, 'VEN1128', 5.00, 12000.00, 'activo', '2026-02-03', '2026-02-03 23:28:48'),
+(9, 11, 'VEN4200', 5.00, 12000.00, 'activo', '2026-02-09', '2026-02-09 22:07:13');
 
 -- --------------------------------------------------------
 
@@ -345,6 +461,17 @@ CREATE TABLE `ventas` (
   `fecha_anulacion` timestamp NULL DEFAULT NULL,
   `motivo_anulacion` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `ventas`
+--
+
+INSERT INTO `ventas` (`id_venta`, `numero_venta`, `id_vendedor`, `id_cliente`, `fecha_venta`, `subtotal`, `descuento`, `total`, `estado`, `observaciones`, `id_usuario_registro`, `fecha_registro`, `fecha_anulacion`, `motivo_anulacion`) VALUES
+(4, 'V21262505', 7, NULL, '2026-02-03', 128.00, 0.00, 128.00, 'completada', 'asad', 9, '2026-02-03 23:35:59', NULL, NULL),
+(5, 'V65573893', 7, NULL, '2026-02-03', 4.00, 0.00, 4.00, 'completada', 'sd', 9, '2026-02-03 23:46:37', NULL, NULL),
+(10, 'V03354131', 7, NULL, '2026-02-09', 52.00, 0.00, 52.00, 'completada', 'dsdsfsdf', 9, '2026-02-09 21:25:00', NULL, NULL),
+(11, 'V79607855', 9, NULL, '2026-02-09', 12.00, 0.00, 12.00, 'completada', 'sdfsdsdfsdf', 11, '2026-02-09 22:08:52', NULL, NULL),
+(12, 'V59749149', 9, NULL, '2026-02-09', 48.00, 0.00, 48.00, 'completada', 'sadads', 11, '2026-02-09 22:09:11', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -544,19 +671,19 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `auditoria`
 --
 ALTER TABLE `auditoria`
-  MODIFY `id_auditoria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_auditoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_ventas`
 --
 ALTER TABLE `detalle_ventas`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `grupos_productos`
@@ -568,13 +695,13 @@ ALTER TABLE `grupos_productos`
 -- AUTO_INCREMENT de la tabla `historial_precios`
 --
 ALTER TABLE `historial_precios`
-  MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -586,19 +713,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `vendedores`
 --
 ALTER TABLE `vendedores`
-  MODIFY `id_vendedor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_vendedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas

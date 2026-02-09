@@ -151,6 +151,8 @@ const App = {
         } catch (error) {
             console.error('Error en logout:', error);
             UI.showToast('Error al cerrar sesión', 'error');
+            // Restaurar estado del botón de login por si quedó en loading
+            this.resetLoginButtonState();
         }
     },
 
@@ -165,7 +167,35 @@ const App = {
         const loginForm = document.getElementById('login-form');
         if (loginForm) {
             loginForm.reset();
+            // Asegurar que el botón de envío esté habilitado y con el texto por defecto
+            const submitBtn = loginForm.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Iniciar Sesión';
+            }
         }
+    },
+
+    /**
+     * Asegura que el botón de login esté en su estado por defecto (habilitado, sin spinner)
+     * Se usa como medida de recuperación si queda en loading tras logout.
+     */
+    resetLoginButtonState() {
+        const loginScreen = document.getElementById('login-screen');
+        if (!loginScreen) return;
+        const buttons = loginScreen.querySelectorAll('button');
+        buttons.forEach(btn => {
+            try {
+                btn.disabled = false;
+                // Si el botón es submit lo normalizamos al texto por defecto
+                if (btn.getAttribute('type') === 'submit') {
+                    btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Iniciar Sesión';
+                } else {
+                    // eliminar spinner si existiera
+                    btn.classList.remove('loading');
+                }
+            } catch (e) { /* ignorar */ }
+        });
     },
 
     /**
