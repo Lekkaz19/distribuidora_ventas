@@ -1,9 +1,9 @@
 # Distribuidora Ventas
 
-Aplicación web para la gestión de productos, vendedores y ventas, diseñada como entrega de tarea y para evaluación en entorno local.
+Aplicación web para la gestión de productos, vendedores y ventas, preparada para ejecución en un entorno local.
 
 ## Objetivo
-Permitir al evaluador revisar de forma rápida: creación/edición/eliminación de productos y vendedores, registro de ventas y generación de reportes básicos.
+Permitir revisar de forma rápida: creación/edición/eliminación de productos y vendedores, registro de ventas y generación de reportes básicos.
 
 ## Requisitos
 - PHP 7.4+ (XAMPP o equivalente)
@@ -17,14 +17,12 @@ Permitir al evaluador revisar de forma rápida: creación/edición/eliminación 
 - Si necesitas, ajusta las credenciales en `config/database.php`.
 - Abre la aplicación en el navegador: `http://localhost/distribuidora_ventas/index.html`.
 
-> Nota: no incluyo comandos en este documento; los pasos anteriores están descritos en texto para facilitar la lectura.
-
 ## Credenciales de demostración (solo entorno local)
 - Administrador: usuario `admin`, contraseña `admin123`.
 - Vendedores de ejemplo: `fer123` / `123456` y `fer321` / `123456`.
 
-## Interfaz y funcionalidades (guía para el evaluador)
-La interfaz está organizada en áreas claras. A continuación explico qué verás y qué puede hacer cada rol.
+## Interfaz y funcionalidades
+La interfaz está organizada en áreas claras. A continuación se describe qué verás y qué puede hacer cada rol.
 
 1. Pantalla de Inicio de Sesión
 - Formulario central con campos Usuario y Contraseña.
@@ -69,13 +67,6 @@ La interfaz está organizada en áreas claras. A continuación explico qué ver�
   - Puede registrar ventas y ver reportes limitados.
   - No puede gestionar productos ni otros usuarios si no tiene rol administrador.
 
-## Flujo de evaluación sugerido (pasos claros para el profesor)
-1. Inicia sesión con la cuenta `admin`.
-2. En `Productos` crea un producto de prueba y verifica que aparece en la tabla.
-3. En `Vendedores` crea un vendedor de prueba y verifica su aparición.
-4. En `Ventas` registra una venta con el vendedor y producto creados; revisa que el total coincida.
-5. Genera un reporte por fecha o por vendedor y comprueba que la venta registrada aparece en el resultado.
-
 ## Notas técnicas breves
 - El frontend está en `index.html` y en los scripts de `js/` (ej.: `js/api.js`, `js/auth.js`, `js/ui.js`).
 - Las rutas del backend están en `api/` (PHP) y devuelven JSON consumido por el cliente.
@@ -91,5 +82,3 @@ La interfaz está organizada en áreas claras. A continuación explico qué ver�
 - Para depurar frontend revisa la consola del navegador y los archivos en `js/`.
 - Para depurar backend revisa los logs de Apache/PHP y `api/*.php`.
 
----
-Si quieres, puedo: 1) añadir una sección con ejemplos de respuestas JSON reales (sin comandos), o 2) generar una copia del README en formato reducido para entregar al profesor como PDF. ¿Cuál prefieres?
